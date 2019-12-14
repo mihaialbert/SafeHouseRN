@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 8635,
   "webpackServerPort": null,
   "expoServerNgrokUrl": "https://9z-8vs.mihaialbert.safehousern.exp.direct",
   "packagerNgrokUrl": "https://packager.9z-8vs.mihaialbert.safehousern.exp.direct",
-  "ngrokPid": 7261
+  "ngrokPid": 8646
 }
