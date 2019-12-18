@@ -4,8 +4,8 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 import AppNavigator from './navigation/AppNavigator';
+import { Container, Item, Form, Input, Button, Label } from "native-base";
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -60,3 +60,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+function render() {
+  return (
+    <Container>
+      <Form>
+        <Item floatingLabel>
+          <Label>Email</Label>
+          <Input autoCapitalize="none" autoCorrect={false} />
+        </Item>
+        <Item floatingLabel>
+          <Label>Password</Label>
+          <Input
+            secureTextEntry={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+        </Item>
+        <Button full rounded success>
+          <Text>Login</Text>
+        </Button>
+      </Form>
+    </Container>
+  );
+}
