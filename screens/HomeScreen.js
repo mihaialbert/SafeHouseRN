@@ -29,35 +29,35 @@ class HomeScreen extends Component {
       "storageBucket": "safe-house-88034.appspot.com"
     }
     const firebase = firebase.initializeApp(config);
+
+
+
+    SignUp = (email, password) => {
+      try {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(user => {
+            console.log(user);
+          });
+      } catch (error) {
+        console.log(error.toString(error));
+      }
+    };
+
+    Login = (email, password) => {
+      try {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(res => {
+            console.log(res.user.email);
+          });
+      } catch (error) {
+        console.log(error.toString(error));
+      }
+    };
   }
-
-
-  SignUp = (email, password) => {
-    try {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(user => {
-          console.log(user);
-        });
-    } catch (error) {
-      console.log(error.toString(error));
-    }
-  };
-
-  Login = (email, password) => {
-    try {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(res => {
-          console.log(res.user.email);
-        });
-    } catch (error) {
-      console.log(error.toString(error));
-    }
-  };
-
 
   render() {
     return (
@@ -78,7 +78,7 @@ class HomeScreen extends Component {
               onChangeText={password => this.setState({ password })}
             />
           </Item>
-          <Button full rounded success style={{ marginTop: 30 }} onPress={() => this.LogIn(this.state.email, this.state.password)}>
+          <Button full rounded success style={{ marginTop: 30 }} onPress={() => this.Login(this.state.email, this.state.password)}>
             <Text>Login</Text>
           </Button>
         </Form>

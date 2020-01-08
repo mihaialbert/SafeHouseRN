@@ -3,14 +3,22 @@ import { View, Text, Picker, TextInput } from 'react-native';
 import * as firebase from 'firebase';
 // import {firebaseConfig} from '../constants/FirebaseConfig'
 
+
+
 class Settings extends Component {
 
   state = {
-      intervalValue: 0,
-      firebaseInstance: null,
-      settingsRef: null
+    intervalValue: 0,
+    firebaseInstance: null,
+    settingsRef: null
   }
-
+  async componentWillMount() {
+    await Expo.Font.loadAsync()({
+      Roboto: require('../node_modules/native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('../node_modules/native-base/Fonts/Roboto_medium.ttf')
+    });
+    this.setState({ isReady: true });
+  }
   componentDidMount() {
     const firebaseConfig = {
       "databaseURL": "https://safe-house-88034.firebaseio.com",
@@ -20,16 +28,16 @@ class Settings extends Component {
     }
     firebaseInstance = firebase.initializeApp(firebaseConfig);
 
-    this.setState({firebaseInstance: firebaseInstance});
+    this.setState({ firebaseInstance: firebaseInstance });
 
     const database = firebaseInstance.database();
     const ref = database.ref('config');
 
-    this.setState({settingsRef: ref})
+    this.setState({ settingsRef: ref })
 
-    ref.on("value", snapshot => { 
+    ref.on("value", snapshot => {
       console.log(snapshot.val().read_sensor_interval_sec);
-      this.setState({intervalValue: snapshot.val().read_sensor_interval_sec}) 
+      this.setState({ intervalValue: snapshot.val().read_sensor_interval_sec })
     })
   }
 
@@ -45,7 +53,7 @@ class Settings extends Component {
           <TextInput
             keyboardType={'numeric'}
             value={this.state.intervalValue.toString()}
-            onChangeText={(newValue) => {this.state.settingsRef.set({read_sensor_interval_sec: newValue})}}
+            onChangeText={(newValue) => { this.state.settingsRef.set({ read_sensor_interval_sec: newValue }) }}
           />
         </View>
       </View>
